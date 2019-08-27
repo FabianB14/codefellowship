@@ -30,10 +30,12 @@ public class ApplicationUserController {
 
     @GetMapping("/")
     public String home(Principal principal, Model model){
-        ApplicationUser logedUser = applicationUserRepository.findByUsername(principal.getName());
-        model.addAttribute("applicationUser",principal);
-        model.addAttribute("user",logedUser);
 
+        if(principal != null) {
+            ApplicationUser logedUser = applicationUserRepository.findByUsername(principal.getName());
+            model.addAttribute("applicationUser", principal);
+            model.addAttribute("user", logedUser);
+        }
         return "home";
     }
     @GetMapping("/users")
@@ -55,9 +57,8 @@ public class ApplicationUserController {
     @GetMapping("/user/{id}")
     public String userPage(@PathVariable long id, Model model ,Principal principal){
        ApplicationUser loggedinUser = applicationUserRepository.findByUsername(principal.getName());
-       model.addAttribute("applicationUser", loggedinUser);
-       model.addAttribute("userBio",loggedinUser.getBio());
-        model.addAttribute("userFName",loggedinUser.getFirstname());
+       model.addAttribute("user", loggedinUser);
+       System.out.println(loggedinUser.getUsername());
         return "userPage";
     }
 }
