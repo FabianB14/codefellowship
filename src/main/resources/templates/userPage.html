@@ -5,7 +5,12 @@
     <title>User Page</title>
 </head>
 <body>
-    <h1 th:text="${userFName}"></h1>
-    <p th:text="#${userBio}"></p>
+    <a href="/">Home</a>
+    <h1 th:text="${user.firstname}"></h1>
+    <label for="bio">Date of Birth:</label>
+    <p th:text="${user.dateOfBirth}" id="dateOfbirth"></p>
+    <label for="bio">Bio:</label>
+    <p th:text="${user.bio}" id="bio"></p>
+
 </body>
 </html>
