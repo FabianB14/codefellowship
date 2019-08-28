@@ -6,18 +6,18 @@
 </head>
 <body>
 <h1>Welcome to .......what ever this is!</h1>
-    <div th:unless="${applicationUser}">
-        <a href="/login">Log in</a>
-        <a href="/users">Sign up</a>
-    </div>
-    <div th:if="${user}">
-        <a th:href="${'/user/'+ user.id}">Profile</a>
-        <a href="logout">Log out</a>
-    </div>
-    <div th:if="${applicationUser}">
-   <h1> Hello, <span th:text="${applicationUser.name}"></span></h1>
-    </div>
+<!--    <div th:unless="${applicationUser}">-->
+<!--        <a href="/login">Log in</a>-->
+<!--        <a href="/users">Sign up</a>-->
+<!--    </div>-->
+<!--    <div th:if="${user}">-->
+<!--        <a th:href="${'/user/'+ user.id}">Profile</a>-->
+<!--        <a href="logout">Log out</a>-->
+<!--    </div>-->
+<!--    <div th:if="${applicationUser}">-->
+<!--   <h1> Hello, <span th:text="${applicationUser.name}"></span></h1>-->
+<!--    </div>-->
 
-<!--    <div th:replace="fragments/nav :: nav"></div>-->
+    <div th:replace="fragments/nav :: nav"></div>
 </body>
 </html>
