@@ -30,11 +30,12 @@ public class ApplicationUserController {
 
     @GetMapping("/")
     public String home(Principal principal, Model model){
-
         if(principal != null) {
             ApplicationUser logedUser = applicationUserRepository.findByUsername(principal.getName());
             model.addAttribute("applicationUser", principal);
+            System.out.println(principal.getName());
             model.addAttribute("user", logedUser);
+            System.out.println(logedUser.getFirstname());
         }
         return "home";
     }

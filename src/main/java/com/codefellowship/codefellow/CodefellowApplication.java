@@ -8,5 +8,4 @@ public class CodefellowApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CodefellowApplication.class, args);
 	}
-
 }

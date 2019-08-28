@@ -5,12 +5,17 @@
     <title>User Page</title>
 </head>
 <body>
-    <a href="/">Home</a>
+
+    <div th:replace="fragments/nav :: nav"></div>
+    <a th:href="${/post}">Post</a>
     <h1 th:text="${user.firstname}"></h1>
     <label for="bio">Date of Birth:</label>
     <p th:text="${user.dateOfBirth}" id="dateOfbirth"></p>
     <label for="bio">Bio:</label>
     <p th:text="${user.bio}" id="bio"></p>
-
+    <div th:if="${post}">
+    <li th:each="post : ${viewedUser.post}" th:text="${post}">
+    </li>
+    </div>
 </body>
 </html>
