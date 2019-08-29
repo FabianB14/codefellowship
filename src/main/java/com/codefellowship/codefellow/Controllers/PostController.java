@@ -19,12 +19,12 @@ import java.text.SimpleDateFormat;
 @Controller
 public class PostController {
     @Autowired
+    ApplicationUserRepository applicationUserRepository;
+    @Autowired
     PostRepository postRepository;
 
-    @Autowired
-    ApplicationUserRepository applicationUserRepository;
 
-    @GetMapping("/post")
+    @GetMapping("/post/{id}")
     public String writePost(){
         return "posting";
     }
@@ -37,6 +37,6 @@ public class PostController {
         System.out.println(formatter.format(date));
         Post newPost = new Post(body, date,loggedInUser);
         postRepository.save(newPost);
-        return new RedirectView("/userPage");
+        return new RedirectView("/user/" + loggedInUser.getId());
     }
 }
