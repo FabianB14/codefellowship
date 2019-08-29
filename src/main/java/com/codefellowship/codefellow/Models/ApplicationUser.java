@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -21,10 +22,20 @@ public class ApplicationUser implements UserDetails {
     Date dateOfBirth;
     String bio;
 
+    @ManyToMany
+    @JoinTable(
+            // name is potato
+            name="followed_users",
+            // join columns: column where I find my own ID
+            joinColumns = { @JoinColumn(name="userThatFollows") },
+            // inverse: column where I find someone else's ID
+            inverseJoinColumns = { @JoinColumn(name="") }
+    )
     @OneToMany(fetch = FetchType.EAGER, mappedBy="writer")
-    List<Post> posts;
+    Set<Post> posts;
 
-    public ApplicationUser(String firstname, String lastname,String username, String password, Date dateOfBirth, String bio){
+
+    public ApplicationUser(String firstname, String lastname, String username, String password, Date dateOfBirth, String bio){
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -32,6 +43,8 @@ public class ApplicationUser implements UserDetails {
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
     }
+
+
     public ApplicationUser(){}
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -86,5 +99,12 @@ public class ApplicationUser implements UserDetails {
 
     public String getBio() {
         return bio;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+    public String toString(){
+        return this.getPosts().toString();
     }
 }

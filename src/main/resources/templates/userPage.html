@@ -7,14 +7,14 @@
 <body>
 
     <div th:replace="fragments/nav :: nav"></div>
-    <a th:href="${/post}">Post</a>
+    <a th:href="${'/post/' + user.id}">Post</a>
     <h1 th:text="${user.firstname}"></h1>
     <label for="bio">Date of Birth:</label>
     <p th:text="${user.dateOfBirth}" id="dateOfbirth"></p>
     <label for="bio">Bio:</label>
     <p th:text="${user.bio}" id="bio"></p>
-    <div th:if="${post}">
-    <li th:each="post : ${viewedUser.post}" th:text="${post}">
+    <div th:if="${user}">
+    <li th:each="post : ${user.getPosts()}" th:text="${post}">
     </li>
     </div>
 </body>

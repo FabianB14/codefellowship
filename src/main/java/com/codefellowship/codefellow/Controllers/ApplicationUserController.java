@@ -28,24 +28,10 @@ public class ApplicationUserController {
     @Autowired
     PasswordEncoder encoder;
 
-    @GetMapping("/")
-    public String home(Principal principal, Model model){
-        if(principal != null) {
-            ApplicationUser logedUser = applicationUserRepository.findByUsername(principal.getName());
-            model.addAttribute("applicationUser", principal);
-            System.out.println(principal.getName());
-            model.addAttribute("user", logedUser);
-            System.out.println(logedUser.getFirstname());
-        }
-        return "home";
-    }
-    @GetMapping("/users")
-    public String reg(){
-        return "registration";
-    }
+    
     @PostMapping("/registration")
     public RedirectView createUser(String firstname, String lastname, String username, String password, Date dateOfBirth, String bio){
-        ApplicationUser newUser = new ApplicationUser(firstname, lastname, username,encoder.encode(password),dateOfBirth,bio);
+        ApplicationUser newUser = new ApplicationUser(firstname, lastname, username ,encoder.encode(password),dateOfBirth,bio);
         applicationUserRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -59,6 +45,7 @@ public class ApplicationUserController {
     public String userPage(@PathVariable long id, Model model ,Principal principal){
        ApplicationUser loggedinUser = applicationUserRepository.findByUsername(principal.getName());
        model.addAttribute("user", loggedinUser);
+        System.out.println( loggedinUser.getPosts().toString());
        System.out.println(loggedinUser.getUsername());
         return "userPage";
     }
